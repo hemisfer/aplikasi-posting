@@ -15,7 +15,7 @@
                   </p>
 
                   <div class="table-responsive pt-3">
-                      <table class="table table-bordered">
+                      <table class="table table-bordered" id="myTable">
                             <thead>
                                 <tr>
                                     <th>

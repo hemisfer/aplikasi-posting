@@ -4,10 +4,9 @@
     <div class="recent">
         <h3>RECENT POSTS</h3>
         <ul>
-        <li><a href="#">Aliquam tincidunt mauris</a></li>
-        <li><a href="#">Vestibulum auctor dapibus  lipsum</a></li>
-        <li><a href="#">Nunc dignissim risus consecu</a></li>
-        <li><a href="#">Cras ornare tristiqu</a></li>
+            @foreach ($recentpost as $recent)
+        <li><a href="{{ route('single', $recent->id) }}">{{ $recent->judul }}</a></li>
+            @endforeach
         </ul>
     </div>
     <div class="comments">

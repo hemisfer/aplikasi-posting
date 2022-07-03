@@ -27,6 +27,7 @@ Route::get('/single/{id}', [App\Http\Controllers\WelcomeController::class, 'sing
 Route::get('/about', [App\Http\Controllers\WelcomeController::class, 'about'])->name('about');
 Route::get('/contact', [App\Http\Controllers\WelcomeController::class, 'contact'])->name('contact');
 Route::get('/spesifik/{topik}', [App\Http\Controllers\WelcomeController::class, 'spesifik'])->name('spesifik');
+Route::get('/recentposts', [App\Http\Controllers\WelcomeController::class, 'recentpost'])->name('recentpost');
 
 
 Route::get('/user', [App\Http\Controllers\UserController::class, 'index'])->name('user');

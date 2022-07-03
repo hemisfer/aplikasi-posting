@@ -17,14 +17,19 @@ class WelcomeController extends Controller
         return $topik;
     }
 
-
+    public function konfigurasi ()
+    {
+        $data = Posting::with(['user'])->orderBy('created_at', 'DESC');
+        $konfigurasi = Konfigurasi::first();
+        return $konfigurasi;
+    }
 
     public function index ()
     {
         $data = Posting::with(['user'])->orderBy('created_at', 'DESC');
-        $konfigurasi = Konfigurasi::first();
+        $konfigurasi = $this->konfigurasi();
         // dd($konfigurasi);
-
+        $recentpost = $this->recentpost();
         if(request('keyword'))
              {
                 $data->where('judul', 'like', '%' . request('keyword') . '%');
@@ -32,16 +37,10 @@ class WelcomeController extends Controller
                 $data->orWhereRelation('user', 'name', 'like', '%' . request('keyword') . '%');
              }
         
-
-        if(request('topik'))
-             {
-                $data->where('topik', request('topik'));
-             }
-
         $post = $data->get();
         $topik = $this->topik();
         // dd($topik);
-        return view ('welcome', compact('post', 'konfigurasi', 'topik'));
+        return view ('welcome', compact('post', 'konfigurasi', 'topik', 'recentpost'));
     }
 
     public function single($id)
@@ -49,17 +48,19 @@ class WelcomeController extends Controller
         $data = Posting::find($id);
         // $user = User::all();
         $user = User::find($id);
-        $konfigurasi = Konfigurasi::first();
+        $konfigurasi = $this->konfigurasi();
         $topik = $this->topik();
+        $recentpost = $this->recentpost();
 
-        return view('singles.single', compact('data','user','konfigurasi', 'topik'));
+
+        return view('singles.single', compact('data','user','konfigurasi', 'topik', 'recentpost'));
     }
 
     public function about()
     {
         
         $data  = Posting::with(['user'])->orderBy('created_at', 'DESC');
-        $konfigurasi = Konfigurasi::first();
+        $konfigurasi = $this->konfigurasi();
         $topik = $this->topik();
 
         // dd($konfigurasi);
@@ -70,7 +71,7 @@ class WelcomeController extends Controller
     public function contact()
     {
         $data  = Posting::with(['user'])->orderBy('created_at', 'DESC');
-        $konfigurasi = Konfigurasi::first();
+        $konfigurasi = $this->konfigurasi();
 
         $topik = $this->topik();
 
@@ -83,14 +84,27 @@ class WelcomeController extends Controller
 
     $data = Posting::with(['user'])->where('topik', $topik)->orderBy('created_at', 'DESC');
     $post = $data->get();
+    $recentpost = $this->recentpost();
 
-    $konfigurasi = Konfigurasi::first();
+    $konfigurasi = $this->konfigurasi();
     $topik = $this->topik();
 
     // $topik = Posting::with(['user'])->groupBy('topik')->orderBy('created_at','DESC')->get();
     // dd($post);
-    return view ('singles.spesifik', compact('post', 'konfigurasi', 'topik'));
+    return view ('singles.spesifik', compact('post', 'konfigurasi', 'topik', 'recentpost'));
    }
+
+   public function recentpost()
+   {
+    $data = Posting::with(['user'])->orderBy('created_at', 'DESC');
+    $post = $data->limit(5)->get();
+    
+    return $post;
+
+    
+
+   }
+
 
    
 }
