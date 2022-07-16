@@ -51,3 +51,7 @@ Route::get('/edit-konfigurasi/{id}', [App\Http\Controllers\FrontController::clas
 Route::post('/update-konfigurasi', [App\Http\Controllers\FrontController::class, 'update'])->name('update-konfigurasi');
 Route::get('/delete-konfigurasi/{id}', [App\Http\Controllers\FrontController::class, 'delete'])->name('delete-konfigurasi');
 
+
+Route::get('/comment', [App\Http\Controllers\CommentController::class, 'index'])->name('comment');
+Route::post('/store-comment', [App\Http\Controllers\CommentController::class, 'store'])->name('store-comment');
+Route::get('/delete-comment/{id}', [App\Http\Controllers\CommentController::class, 'delete'])->name('delete-comment');

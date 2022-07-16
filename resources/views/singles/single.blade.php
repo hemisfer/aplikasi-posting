@@ -88,27 +88,69 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					{{-- <p>{{$data->created_at->toDateString();}}</p> --}}
 					<p>{{date('d M Y H:i:s', strtotime($data->created_at))}} / {{ $data->topik }}</p>
 					<p><?php echo htmlspecialchars_decode($data->isi)?></p>
+					<h5 class="post-author_head">Written by {{ $data->user->name }}<a href="#" title="Posts by admin" rel="author"></a></h5>
+
 					 					 
 			  </div>
 			 <ul class="comment-list">
-		  		   <h5 class="post-author_head">Written by {{ $data->user->name }}<a href="#" title="Posts by admin" rel="author"></a></h5>
+		  		   <h5 class="post-author_head">All Comments <a href="#" title="Posts by admin" rel="author"></a></h5>
 		  		   <li><img src="images/avatar.png" class="img-responsive" alt="">
 		  		   <div class="desc">
-		  		   <p>View all posts by: <a href="#" title="Posts by admin" rel="author">admin</a></p>
+		  		   <p>
+					   
+					@foreach ($commentsByPostingId as $comment)
+						 <h5 class="post-author_head">{{ $comment->name }}<a href="#" title="Posts by admin" rel="author"></a></h5>
+					@endforeach
+
+				   </p>
 		  		   </div>
 		  		   <div class="clearfix"></div>
 		  		   </li>
 		  	  </ul>
-			  {{-- <div class="content-form">
+			  <div class="content-form">
 					 <h3>Leave a comment</h3>
-					<form>
-						<input type="text" placeholder="Name" required/>
-						<input type="text" placeholder="Email" required/>
-						<input type="text" placeholder="Phone" required/>
-						<textarea placeholder="Message"></textarea>
+					<form action="{{ route('store-comment') }}" method="POST" enctype="multipart/form">
+						@csrf
+						<input type="hidden" name="post_id" value="{{$data->id}}">
+
+						<div>
+							<input type="text" placeholder="Name" name="name" class="comment-name @error('name') is-invalid @enderror"  />
+							@error('name')
+							<span class="invalid-feedback" role="alert">
+								<strong>{{ $message }}</strong>
+							</span>
+							@enderror
+						</div>
+						
+						<div>
+							<input type="text" placeholder="Email" name="email" class="comment-name @error('email') is-invalid @enderror" />
+							@error('email')
+							<span class="invalid-feedback" role="alert">
+								<strong>{{ $message }}</strong>
+							</span>
+							@enderror
+						</div>
+
+						<div>
+							<input type="text" placeholder="Phone" name="phone" class="comment-name @error('phone') is-invalid @enderror" />
+							@error('phone')
+							<span class="invalid-feedback" role="alert">
+								<strong>{{ $message }}</strong>
+							</span>
+							@enderror
+						</div>
+
+						<div>
+							<textarea placeholder="Message" name="message" class="comment-name @error('phone') is-invalid @enderror"></textarea>
+							@error('message')
+							<span class="invalid-feedback" role="alert">
+								<strong>{{ $message }}</strong>
+							</span>
+							@enderror
+						</div>
 						<input type="submit" value="SEND"/>
 				   </form>
-						 </div> --}}
+						 </div>
 		  </div>
 
 			  {{-- <div class="col-md-4 side-content">

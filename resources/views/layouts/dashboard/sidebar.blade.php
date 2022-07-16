@@ -12,9 +12,11 @@
     <div class="comments">
         <h3>RECENT COMMENTS</h3>
         <ul>
-        <li><a href="#">Amada Doe </a> on <a href="#">Hello World!</a></li>
-        <li><a href="#">Peter Doe </a> on <a href="#"> Photography</a></li>
-        <li><a href="#">Steve Roberts  </a> on <a href="#">HTML5/CSS3</a></li>
+            @foreach ($comments as $comment)
+        <li> &#64;{{ $comment->name }} says " {{ $comment->message }} " on <a href="{{ route('single', $comment->post_id) }}">{{ \Illuminate\Support\Str::limit($comment->posting->judul, 30, '...') }}</a></li>
+            @endforeach
+        {{-- <li><a href="#">Peter Doe </a> on <a href="#"> Photography</a></li>
+        <li><a href="#">Steve Roberts  </a> on <a href="#">HTML5/CSS3</a></li> --}}
         </ul>
     </div>
     <div class="clearfix"></div>
