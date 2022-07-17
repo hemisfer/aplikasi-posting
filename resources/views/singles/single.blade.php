@@ -95,14 +95,18 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			 <ul class="comment-list">
 		  		   <h5 class="post-author_head">All Comments <a href="#" title="Posts by admin" rel="author"></a></h5>
 		  		   <li><img src="images/avatar.png" class="img-responsive" alt="">
-		  		   <div class="desc">
-		  		   <p>
+		  		   <div class="desc"  >
+		  		   
 					   
 					@foreach ($commentsByPostingId as $comment)
-						 <h5 class="post-author_head">{{ $comment->name }}<a href="#" title="Posts by admin" rel="author"></a></h5>
+						 <h5 class="comment-author">{{ $comment->name }}<a href="#" title="Posts by admin" rel="author"></a></h5>
+						 <h5>{{ $comment->message }} </h5>
+						 <h5 style="color: #848484; font-size: 11px;" class="comment-date">{{$comment->created_at->diffForHumans()}}</h5>
+						 <hr>
+						 
 					@endforeach
 
-				   </p>
+				   
 		  		   </div>
 		  		   <div class="clearfix"></div>
 		  		   </li>

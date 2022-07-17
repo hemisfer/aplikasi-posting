@@ -24,7 +24,7 @@
         <h3>ARCHIVES</h3>
         <ul>
             @foreach ($archive as $bulan)
-        <li><a href=""> {{date(' M Y', strtotime($bulan->bulan))}} </a></li>
+        <li><a href="{{route('archives', date('F Y', strtotime($bulan->bulan))) }}"> {{date(' M Y', strtotime($bulan->bulan))}} </a></li>
             @endforeach
         </ul>
     </div>

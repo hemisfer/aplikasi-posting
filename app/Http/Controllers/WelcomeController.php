@@ -126,14 +126,24 @@ class WelcomeController extends Controller
     return $post;
    }
 
-   public function archives($archive)
+   public function archives($bulan)
    {
-    $data = Posting::with(['user'])->where('MONTH(created_at)', $archive)->orderBy('created_at', 'DESC');
-    $post = $data->get();
+    // dd($archive);
+    // $data = Posting::with(['user'])->where(DB::raw('DATE_FORMAT(cresated_at, "%M %Y")','=', 'July 2022'))->orderBy('created_at', 'DESC');
+    // $post = $data->get();
+    $post = Posting::with(['user'])->where(DB::raw("(DATE_FORMAT(created_at, '%M %Y'))"), "$bulan")->get();
+    // dd($panggilbulan);
+    // dd($post);
+    // $post = DB::select("select * from postings where DATE_FORMAT(created_at, '%M %Y') = '$archive' ");
+    // dd($post);
     $konfigurasi = $this->konfigurasi();
- 
+    $recentpost = $this->recentpost();
+    $comments = $this->comments();
+    $archive = $this->arsip();
+    $topik = $this->topik();
 
-    return view('singles.archives', compact('post', 'konfigurasi', 'archive'));
+
+    return view('singles.archives', compact('post', 'konfigurasi', 'archive', 'recentpost', 'comments', 'topik'));
    }
 
   public function comments()
