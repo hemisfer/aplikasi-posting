@@ -11,6 +11,7 @@ class Posting extends Model
 
     protected $guarded = ['id'];
 
+    // buat relasi tabel user dengan tabel posting
     public function user()
     {
         return $this->belongsto(User::class, 'user_id', 'id');

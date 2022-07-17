@@ -29,7 +29,7 @@ class CommentController extends Controller
     {
         $request->validate( [
             'post_id' => 'required',
-            'name' => 'required|min:5',
+            'name' => 'required',
             'email' => 'required',
             'phone' => 'required',
             'message' => 'required'

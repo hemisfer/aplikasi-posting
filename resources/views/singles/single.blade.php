@@ -86,9 +86,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<img src="{{ asset('storage/' . $data->gambar) }}" alt=""/>	
 					<h1>{{ $data->judul }}</h1>
 					{{-- <p>{{$data->created_at->toDateString();}}</p> --}}
-					<p>{{date('d M Y H:i:s', strtotime($data->created_at))}} / {{ $data->topik }}</p>
-					<p><?php echo htmlspecialchars_decode($data->isi)?></p>
-					<h5 class="post-author_head">Written by {{ $data->user->name }}<a href="#" title="Posts by admin" rel="author"></a></h5>
+					<p>{{date('d M Y H:i:s', strtotime($data->created_at))}} / <a class="single-page-topik" href="{{ route('spesifik', $data->topik) }}">{{ $data->topik }}</a> </p> 
+					<p><?= $data->isi?> </p>
+					<h5 class="post-author_head">Written by {{ $data->user->name }} <br>
+					<a style="font-size: 13px;" href="{{ route('byauthor', $data->user->name) }}" title="Posts by {{ $data->user->name }}" rel="author">Click here to view all posts written by {{ $data->user->name }}</a></h5>
 
 					 					 
 			  </div>

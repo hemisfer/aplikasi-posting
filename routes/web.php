@@ -29,6 +29,7 @@ Route::get('/contact', [App\Http\Controllers\WelcomeController::class, 'contact'
 Route::get('/spesifik/{topik}', [App\Http\Controllers\WelcomeController::class, 'spesifik'])->name('spesifik');
 Route::get('/recentposts', [App\Http\Controllers\WelcomeController::class, 'recentpost'])->name('recentpost');
 Route::get('/archives/{archive}', [App\Http\Controllers\WelcomeController::class, 'archives'])->name('archives');
+Route::get('/byauthor/{author}', [App\Http\Controllers\WelcomeController::class, 'byauthor'])->name('byauthor');
 
 
 Route::get('/user', [App\Http\Controllers\UserController::class, 'index'])->name('user');

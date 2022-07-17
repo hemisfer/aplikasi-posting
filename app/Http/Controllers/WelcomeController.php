@@ -111,11 +111,13 @@ class WelcomeController extends Controller
     $konfigurasi = $this->konfigurasi();
     $topik = $this->topik();
     $comments = $this->comments();
+    $archive = $this->arsip();
+
 
 
     // $topik = Posting::with(['user'])->groupBy('topik')->orderBy('created_at','DESC')->get();
     // dd($post);
-    return view ('singles.spesifik', compact('post', 'konfigurasi', 'topik', 'recentpost',  'comments'));
+    return view ('singles.spesifik', compact('post', 'konfigurasi', 'topik', 'recentpost',  'comments', 'archive'));
    }
 
    public function recentpost()
@@ -163,6 +165,24 @@ class WelcomeController extends Controller
 
    }
 
+   public function byAuthor($author)
+   {
+
+    $data = Posting::with(['user'])->WhereRelation('user', 'name', '=', $author)->orderBy('created_at', 'DESC');
+    $post = $data->get();
+    $recentpost = $this->recentpost();
+
+    $konfigurasi = $this->konfigurasi();
+    $topik = $this->topik();
+    $comments = $this->comments();
+    $archive = $this->arsip();
+
+
+
+    // $topik = Posting::with(['user'])->groupBy('topik')->orderBy('created_at','DESC')->get();
+    // dd($post);
+    return view ('singles.spesifik', compact('post', 'konfigurasi', 'topik', 'recentpost',  'comments', 'archive'));
+   }
 
    
 }

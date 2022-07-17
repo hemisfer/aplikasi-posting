@@ -412,7 +412,7 @@ background:#00aeff;
 color:#fff;
 }
 /*----*/
-.single-grid p {
+.single-grid p  {
 font-family: 'Jacques Francois', sans-serif;
 color: #9a9da0;
 font-size: 1em;
@@ -420,6 +420,11 @@ line-height: 1.8em;
 margin:1em 0;
 text-align:justify;
 }
+
+.single-page-topik {
+  color: #00aeff;
+}
+
 .single-grid img{
 width:100%;
 }
@@ -622,7 +627,7 @@ padding:0;
 .side-content{
 margin-top:2em;
 }
-.single-grid p {
+.single-grid p  {
 font-size: 1.2em;
 background-color: azure;
 }
